@@ -1,19 +1,54 @@
 
+# class Solution:
+#     def maximumSwap(self, num: int) -> int:
+
+#         maxValue = num
+#         max_permutation_value = self.permutation(str(num))
+
+#         if maxValue < max_permutation_value:
+#             maxValue = max_permutation_value
+
+#         return maxValue
+
+#     def permutation(self, digits, current_digit=""):
+#         if len(digits) == 0:
+#             return int(current_digit)
+
+#         max_permutation = int(current_digit) if current_digit else 0
+
+#         for i in range(len(digits)):
+#             new_permunation = current_digit + digits[i]
+#             # print("new premunation", new_permunation)
+#             remain_number = digits[:i]+digits[i+1:]
+#             # print("remain mumber", remain_number)
+#             perm_value = self.permutation(remain_number, new_permunation)
+#             max_permutation = max(max_permutation, perm_value)
+
+#         return max_permutation
+
+
 class Solution:
     def maximumSwap(self, num: int) -> int:
+        # Convert the number to a list of digits.
+        num_str = list(str(num))
 
-        maxValue = num
-        for i in range(1, 3):
-            num /= 10
-            print('num after division', num)
-            temp = num % 10
-            print('numer after modulation', temp)
-            num = temp
-            print('num after tem', num)
-        if (maxValue < num):
-            maxValue = num
+        # Dictionary to record the last occurrence of each digit.
+        last_occurrences = {int(d): i for i, d in enumerate(num_str)}
 
-        return maxValue
+        # Traverse the list of digits.
+        for i, digit in enumerate(num_str):
+            # Check from 9 down to the current digit + 1.
+            for d in range(9, int(digit), -1):
+                # If there's a larger digit later, swap and return.
+                if last_occurrences.get(d, -1) > i:
+                    # Swap current digit with the larger digit.
+                    num_str[i], num_str[last_occurrences[d]
+                                        ] = num_str[last_occurrences[d]], num_str[i]
+                    # Convert the list back to integer and return.
+                    return int("".join(num_str))
+
+        # If no swap was done, return the original number.
+        return num
 
 
 num = 2736
