@@ -54,14 +54,14 @@ result = sol.groupAnagrams(strs)
 print(result)
 
 
-class Solution:
-    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        ans = []
-        word_map = {}
-        for str in strs:
-            sort_str = "".join(sorted(str))
-            if sort_str in word_map:
-                word_map[sort_str].append(str)
-            else:
-                word_map[sort_str] = [str]
-        return list(word_map.values())
+# class Solution:
+#     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+#         ans = []
+#         word_map = {}
+#         for str in strs:
+#             sort_str = "".join(sorted(str))
+#             if sort_str in word_map:
+#                 word_map[sort_str].append(str)
+#             else:
+#                 word_map[sort_str] = [str]
+#         return list(word_map.values())
